@@ -26,11 +26,11 @@ signal = sma_signal ? sma(macd, signal_length) : ema(macd, signal_length)
 hist = macd - signal 
 macdsig = high + (atr(30) * 0.6)
 macdsig2 = low - (atr(30) * 0.6)
-if (crossover(macd,signal) and (close>ema(close,200)) and (macd<0)) //buy
+if (crossover(macd,signal) and (close>ema(close,200)) and (macd<0) and not (open<ema(close,200))) //buy
     label.new(bar_index, macdsig2, text="Buy", size=size.normal, color=color.new(color.green,80), textcolor=color.white, style=label.style_label_up)
-bgcolor((crossover(macd,signal) and (close>ema(close,200)) and (macd<0))? color.green : na, offset=0, transp=85)
+bgcolor((crossover(macd,signal) and (close>ema(close,200)) and (macd<0) and not (open<ema(close,200)))? color.green : na, offset=0, transp=85)
 
-if (crossunder(macd,signal) and (close<ema(close,200)) and (macd>0))
+if (crossunder(macd,signal) and (close<ema(close,200)) and (macd>0) and not (open>ema(close,200)))
     label.new(bar_index, macdsig, text="Sell", size=size.normal, color=color.new(color.red,80), textcolor=color.white)
-bgcolor((crossunder(macd,signal) and (close<ema(close,200)) and (macd>0))? color.red : na, offset=0, transp=85)
+bgcolor((crossunder(macd,signal) and (close<ema(close,200)) and (macd>0) and not (open>ema(close,200)))? color.red : na, offset=0, transp=85)
 
