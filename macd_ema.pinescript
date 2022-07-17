@@ -1,0 +1,13 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © CzarCerro
+
+//@version=4
+study("MACD EMA", overlay=true, precision=1)
+
+//Display 200 EMA
+ema200=plot(title="200 EMA",series=ema(close,200), color=color.blue, linewidth=2)
+
+//Fill up area between bars and ema
+sourceline=plot(title="Closing Line", series=sma(close,1), transp=100)
+fill(ema200,sourceline,color=input(close)>=ema(close,200)? color.green:color.red, transp=90)
+
